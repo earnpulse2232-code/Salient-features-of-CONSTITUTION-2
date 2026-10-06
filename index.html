@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#f8fafc">
+    <title>Speed Building Test — Salient Features of Constitution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --green: #10b981;
+            --green-light: #ecfdf5;
+            --red: #ef4444;
+            --red-light: #fef2f2;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100dvh;
+            font-size: 15px;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: left;
+        }
+        .hidden { display: none !important; }
+
+        /* MODE SELECTION SCREEN */
+        .start-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-main);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .start-card {
+            width: 100%;
+            max-width: 440px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 36px 28px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .brand-logo-img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            margin: 0 auto 16px;
+            display: block;
+            border-radius: 16px;
+        }
+        .start-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        .start-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            text-align: left;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+        .mode-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .mode-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .mode-icon.quiz { background: #dbeafe; color: #2563eb; }
+        .mode-icon.test { background: #d1fae5; color: #059669; }
+        .mode-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        .mode-info-txt {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .mode-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* MAIN APP */
+        .quiz-app {
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .quiz-header {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 18px;
+        }
+        .quiz-header-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .hdr-logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .hdr-brand-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+        .hdr-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            transition: all 0.15s;
+        }
+        .hdr-btn:hover { background: var(--bg-main); }
+        .hdr-timer {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* QUESTIONS CONTAINER */
+        .quiz-main {
+            flex: 1;
+            overflow-y: auto;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+        .q-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+        .q-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .q-num-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .lang-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .q-text {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 22px;
+        }
+        .opts {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        .opt {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: #fff;
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .opt:hover:not(.locked) {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+        .opt.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        .opt.correct {
+            border-color: var(--green);
+            background: var(--green-light);
+        }
+        .opt.wrong {
+            border-color: var(--red);
+            background: var(--red-light);
+        }
+        .opt.locked { cursor: default; }
+        .opt-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1.5px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+        .opt.selected .opt-letter {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+        .opt.correct .opt-letter {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff;
+        }
+        .opt.wrong .opt-letter {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+        .opt-text {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .opt-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+        .opt.correct .opt-tag { background: var(--green); color: #fff; }
+        .opt.wrong .opt-tag { background: var(--red); color: #fff; }
+
+        .sol-box {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+        }
+        .sol-head {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sol-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* BOTTOM NAV */
+        .quiz-nav {
+            flex-shrink: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            padding: 12px 18px;
+        }
+        .quiz-nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.15s ease;
+        }
+        .nav-btn.prev {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+        .nav-btn.prev:disabled { opacity: 0.4; cursor: not-allowed; }
+        .nav-btn.submit {
+            background: var(--green-light);
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .nav-btn.next {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .nav-btn.next:hover { background: var(--primary-hover); }
+
+        /* PALETTE MODAL */
+        .palette-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 150;
+            display: none;
+        }
+        .palette-overlay.open { display: block; }
+        .palette-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: min(340px, 85vw);
+            background: #ffffff;
+            z-index: 160;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.25s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        .palette-drawer.open { transform: translateX(0); }
+        .pal-head {
+            padding: 18px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        .pal-grid {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            align-content: start;
+        }
+        .pal-btn {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: #f8fafc;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s;
+        }
+        .pal-btn:hover { transform: scale(1.05); }
+        .pal-btn.answered { background: var(--green); color: #fff; border-color: var(--green); }
+        .pal-btn.current { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+        /* SUBMIT MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 170;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+        .modal-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .modal-stat {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+        }
+        .modal-stat-num { font-size: 24px; font-weight: 800; color: var(--text-dark); }
+        .modal-stat-label { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+        .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+        .modal-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .modal-btn.confirm { background: var(--primary); color: #fff; }
+        .modal-btn.cancel { background: #f1f5f9; color: var(--text-dark); }
+
+        /* RESULTS SCREEN */
+        .results-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-main);
+            z-index: 180;
+            display: none;
+            overflow-y: auto;
+            padding: 30px 16px 60px;
+        }
+        .results-screen.open { display: block; }
+        .results-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .res-hero { text-align: center; margin-bottom: 24px; }
+        .res-hero h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+        .res-score-card {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
+        }
+        .res-score-val { font-size: 54px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+        .res-score-val span { font-size: 22px; opacity: 0.6; }
+        .res-score-lbl { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; }
+        .res-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .res-item {
+            background: #fff;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .res-item-val { font-size: 22px; font-weight: 700; }
+        .res-item-lbl { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+        .res-actions { display: flex; flex-direction: column; gap: 10px; }
+        .res-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .res-btn.primary { background: var(--primary); color: #fff; }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-80px);
+            background: #0f172a;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 300;
+            opacity: 0;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- START / MODE SELECT -->
+    <div class="start-screen" id="startScreen">
+        <div class="start-card">
+            <img src="logo.png" alt="Quiz Logo" class="brand-logo-img" onerror="this.style.display='none'">
+            <h1 class="start-title">Salient Features of Constitution</h1>
+            <p class="start-desc">Speed Building Test — Choose your mode to begin.</p>
+            
+            <button class="mode-btn" onclick="startApp('quiz')">
+                <div class="mode-icon quiz"><i class="fas fa-bolt"></i></div>
+                <div>
+                    <div class="mode-name">Practice Mode</div>
+                    <div class="mode-info-txt">Instant answer & detailed solution after each question.</div>
+                </div>
+                <i class="fas fa-arrow-right mode-arrow"></i>
+            </button>
+
+            <button class="mode-btn" onclick="startApp('test')">
+                <div class="mode-icon test"><i class="fas fa-clock"></i></div>
+                <div>
+                    <div class="mode-name">Exam Mode</div>
+                    <div class="mode-info-txt">Test environment. View complete result at the end.</div>
+                </div>
+                <i class="fas fa-arrow-right mode-arrow"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div class="quiz-app hidden" id="quizApp">
+        <header class="quiz-header">
+            <div class="quiz-header-inner">
+                <button class="hdr-btn" onclick="openPalette()"><i class="fas fa-th-large"></i></button>
+                <div class="hdr-brand">
+                    <img src="logo.png" alt="Logo" class="hdr-logo-img" onerror="this.style.display='none'">
+                    <span class="hdr-brand-title">Polity Quiz</span>
+                </div>
+                <div class="hdr-timer">
+                    <i class="fas fa-stopwatch"></i>
+                    <span id="timerText">00:00</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="quiz-main" id="quizMain"></main>
+
+        <nav class="quiz-nav" id="quizNav">
+            <div class="quiz-nav-inner">
+                <button class="nav-btn prev" id="prevBtn" onclick="prevQuestion()">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-btn submit" onclick="openSubmitModal()">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
+                <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()">
+                    <span id="nextLabel">Next</span> <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- QUESTION PALETTE -->
+    <div class="palette-overlay" id="paletteOverlay" onclick="closePalette()"></div>
+    <aside class="palette-drawer" id="paletteDrawer">
+        <div class="pal-head">
+            <span>Questions</span>
+            <button onclick="closePalette()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="pal-grid" id="paletteGrid"></div>
+    </aside>
+
+    <!-- SUBMIT CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="submitModal">
+        <div class="modal-box">
+            <h3 class="modal-title">Submit Test?</h3>
+            <div class="modal-stats-grid">
+                <div class="modal-stat">
+                    <div class="modal-stat-num" id="modalAttempted" style="color:var(--green)">0</div>
+                    <div class="modal-stat-label">Attempted</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-num" id="modalUnattempted" style="color:var(--text-muted)">0</div>
+                    <div class="modal-stat-label">Unattempted</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn confirm" onclick="confirmSubmit()">Yes, Finish Test</button>
+                <button class="modal-btn cancel" onclick="closeSubmitModal()">Resume Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL RESULTS SCREEN -->
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-box" id="resultsInner"></div>
+    </div>
+
+    <div class="toast" id="toast"><i class="fas fa-check"></i><span id="toastText"></span></div>
+
+    <script>
+        const QUESTIONS = [
+            {
+                e: "The office of the Speaker in the Indian Parliamentary system is heavily influenced by:",
+                h: "भारतीय संसदीय प्रणाली में लोकसभा अध्यक्ष (स्पीकर) का पद मुख्य रूप से किससे प्रभावित है?",
+                o: ["British Constitution / ब्रिटिश संविधान", "Canadian Constitution / कनाडाई संविधान", "French Constitution / फ्रांसीसी संविधान", "Irish Constitution / आयरिश संविधान"],
+                a: 0,
+                sE: "The office and role of the Speaker in India is heavily influenced by the British parliamentary convention.",
+                sH: "भारतीय संसदीय प्रणाली में स्पीकर का पद ब्रिटिश परंपराओं और संसदीय मॉडल से प्रेरित है।"
+            },
+            {
+                e: "The 'Power of Judicial Review' in India is inspired from which country's constitution?",
+                h: "भारत में 'न्यायिक पुनरावलोकन' की अवधारणा किस देश के संविधान से प्रेरित है?",
+                o: ["British Constitution / ब्रिटिश संविधान", "French Constitution / फ्रांसीसी संविधान", "Irish Constitution / आयरिश संविधान", "United States Constitution / संयुक्त राज्य अमेरिका संविधान"],
+                a: 3,
+                sE: "The concept of Judicial Review and independence of the judiciary is adopted from the US Constitution.",
+                sH: "न्यायिक समीक्षा (Judicial Review) और न्यायपालिका की स्वतंत्रता संयुक्त राज्य अमेरिका के संविधान से ली गई है।"
+            },
+            {
+                e: "The 'residuary powers' in the Indian Constitution were inspired by the constitution of:",
+                h: "भारतीय संविधान में 'अवशिष्ट शक्तियाँ' किस देश के संविधान से प्रेरित थीं?",
+                o: ["Australia / ऑस्ट्रेलिया", "Canada / कनाडा", "South Africa / दक्षिण अफ्रीका", "United States of America / संयुक्त राज्य अमेरिका"],
+                a: 1,
+                sE: "Vesting of residuary powers with the Centre is borrowed from Canada.",
+                sH: "अवशिष्ट शक्तियों को केंद्र के पास निहित करने का प्रावधान कनाडा के संविधान से लिया गया है।"
+            },
+            {
+                e: "The Law-making procedure in Indian Constitution is taken from:",
+                h: "भारतीय संविधान में विधि-निर्माण की प्रक्रिया किस देश के संविधान से ली गई है?",
+                o: ["British Constitution / ब्रिटिश संविधान", "Canadian Constitution / कनाडाई संविधान", "French Constitution / फ्रांसीसी संविधान", "Irish Constitution / आयरिश संविधान"],
+                a: 0,
+                sE: "The law-making procedure and rule of law were adopted from the British Constitution.",
+                sH: "विधि निर्माण की प्रक्रिया और कानून का शासन ब्रिटिश संविधान से ग्रहण किए गए हैं।"
+            },
+            {
+                e: "Which of the following pairs is correctly matched with regard to the subject and its respective list under the Seventh Schedule?",
+                h: "निम्नलिखित में से कौन सा युग्म सातवीं अनुसूची के अंतर्गत विषय और उसकी संबंधित सूची के संबंध में सही सुमेलित है?",
+                o: ["Police - Union List / पुलिस - संघ सूची", "Education - State List / शिक्षा - राज्य सूची", "Trade and Commerce - Concurrent List / व्यापार और वाणिज्य - समवर्ती सूची", "Banking - State List / बैंकिंग - राज्य सूची"],
+                a: 2,
+                sE: "Trade and commerce in products of scheduled industries is under the Concurrent List. Police is State, Banking is Union.",
+                sH: "व्यापार और वाणिज्य समवर्ती सूची में आता है। पुलिस राज्य सूची में है और बैंकिंग संघ सूची में है।"
+            },
+            {
+                e: "Which of the following is NOT in the State List?",
+                h: "निम्नलिखित में से कौन राज्य सूची में नहीं है?",
+                o: ["Police / पुलिस", "Agriculture / कृषि", "Public health / सार्वजनिक स्वास्थ्य", "Atomic energy / परमाणु ऊर्जा"],
+                a: 3,
+                sE: "Atomic energy is exclusively an entry in the Union List.",
+                sH: "परमाणु ऊर्जा विशेष रूप से संघ सूची (Union List) का विषय है।"
+            },
+            {
+                e: "Indian Constitution is a unique blend of _______ and flexibility.",
+                h: "भारतीय संविधान _______ और लचीलेपन का एक अनूठा मिश्रण है।",
+                o: ["conformity / अनुरूपता", "rigidity / कठोरता", "durability / स्थायित्व", "uniformity / एकरूपता"],
+                a: 1,
+                sE: "The Indian Constitution is characterized as a synthesis of rigidity and flexibility.",
+                sH: "भारतीय संविधान कठोरता (rigidity) और लचीलेपन (flexibility) का एक अनूठा सम्मिश्रण है।"
+            },
+            {
+                e: "The Constitution of India establishes a judicial system that is:",
+                h: "भारतीय संविधान एक न्यायिक व्यवस्था स्थापित करता है जो:",
+                o: ["under the control of Parliament / संसद के नियंत्रण में है", "integral and independent / अभिन्न और स्वतंत्र है", "similar to British system / ब्रिटिश प्रणाली के समान है", "under control of State / राज्य के नियंत्रण में है"],
+                a: 1,
+                sE: "The Indian Constitution establishes an integrated and independent judiciary.",
+                sH: "भारतीय संविधान एक एकीकृत (integrated) और स्वतंत्र (independent) न्यायपालिका की स्थापना करता है।"
+            },
+            {
+                e: "The Parliamentary Form of Government has been borrowed by the Indian Constitution from the Constitution of which country?",
+                h: "भारतीय संविधान द्वारा संसदीय शासन प्रणाली किस देश के संविधान से ली गई है?",
+                o: ["United Kingdom / यूनाइटेड किंगडम", "Ireland / आयरलैंड", "United States of America / संयुक्त राज्य अमेरिका", "France / फ्रांस"],
+                a: 0,
+                sE: "The parliamentary system of governance is modeled on the UK's Westminster system.",
+                sH: "संसदीय शासन प्रणाली ब्रिटेन (यूनाइटेड किंगडम) के वेस्टमिंस्टर मॉडल पर आधारित है।"
+            },
+            {
+                e: "Which of the following is NOT correct about the Constitution of India?",
+                h: "निम्नलिखित में से कौन-सा भारतीय संविधान के बारे में सही नहीं है?",
+                o: [
+                    "It reflects historical, social, political and economic conditions / ऐतिहासिक, सामाजिक स्थितियों को दर्शाता है",
+                    "It is a document of social relevance / सामाजिक प्रासंगिकता का दस्तावेज है",
+                    "It suits requirement of India / भारत की आवश्यकता के अनुरूप है",
+                    "The original Constitution contained 395 Articles in 25 parts and 12 schedules / मूल संविधान में 25 भाग और 12 अनुसूचियां थीं"
+                ],
+                a: 3,
+                sE: "Originally, the Constitution contained 395 Articles in 22 Parts and 8 Schedules, not 25 parts and 12 schedules.",
+                sH: "मूल संविधान में 395 अनुच्छेद, 22 भाग और 8 अनुसूचियां थीं, न कि 25 भाग और 12 अनुसूचियां।"
+            },
+            {
+                e: "As of July 2025, how many articles and parts does the Indian Constitution comprise (excluding repealed sections)?",
+                h: "जुलाई 2025 तक, भारतीय संविधान में कितने अनुच्छेद और भाग हैं (निरस्त धाराओं को छोड़कर)?",
+                o: ["395 Articles, 22 Parts", "448 Articles, 25 Parts", "450 Articles, 28 Parts", "356 Articles, 20 Parts"],
+                a: 1,
+                sE: "Through amendments, the Constitution has expanded to around 448+ Articles organized in 25 Parts.",
+                sH: "संशोधनों के बाद संविधान में लगभग 448+ अनुच्छेद और 25 भाग हैं।"
+            },
+            {
+                e: "From which country were the ideals of justice of the Indian Constitution borrowed?",
+                h: "भारतीय संविधान के न्याय के आदर्श किस देश से लिए गए थे?",
+                o: ["The USSR / सोवियत संघ", "The UK / ब्रिटेन", "The US / अमेरिका", "Japan / जापान"],
+                a: 0,
+                sE: "The ideals of justice (social, economic, and political) in the Preamble were inspired by the Russian Revolution (USSR).",
+                sH: "प्रस्तावना में सामाजिक, आर्थिक और राजनीतिक न्याय के आदर्श सोवियत संघ (USSR) की क्रांति से प्रेरित हैं।"
+            },
+            {
+                e: "Under which Schedule of the Indian Constitution is the form of oath or affirmation for a Judge of the Supreme Court mentioned?",
+                h: "भारतीय संविधान की किस अनुसूची के अंतर्गत सर्वोच्च न्यायालय के न्यायाधीश के लिए शपथ या प्रतिज्ञान का स्वरूप उल्लिखित है?",
+                o: ["Fourth Schedule / चौथी अनुसूची", "Second Schedule / दूसरी अनुसूची", "First Schedule / पहली अनुसूची", "Third Schedule / तीसरी अनुसूची"],
+                a: 3,
+                sE: "The Third Schedule contains the forms of oaths or affirmations for constitutional authorities including SC judges.",
+                sH: "तीसरी अनुसूची में सर्वोच्च न्यायालय के न्यायाधीशों सहित प्रमुख पदाधिकारियों की शपथ का प्रारूप दिया गया है।"
+            },
+            {
+                e: "How many Schedules were originally there in the Constitution when it was adopted?",
+                h: "संविधान को अपनाए जाने के समय मूलतः इसमें कितनी अनुसूचियां थीं?",
+                o: ["7", "8", "10", "12"],
+                a: 1,
+                sE: "The original Constitution of India contained 8 Schedules.",
+                sH: "मूल संविधान में कुल 8 अनुसूचियां थीं।"
+            },
+            {
+                e: "Which of the following features of the Indian Constitution is borrowed from United States of America?",
+                h: "भारतीय संविधान की निम्नलिखित में से कौन सी विशेषता संयुक्त राज्य अमेरिका से उधार ली गई है?",
+                o: ["Fundamental duties / मूल कर्तव्य", "Concept of 'Republic' / गणतंत्र की अवधारणा", "The Preamble of the constitution / संविधान की उद्देशिका", "Freedom of trade and commerce / व्यापार और वाणिज्य की स्वतंत्रता"],
+                a: 2,
+                sE: "The idea of having a Preamble and Fundamental Rights was inspired by the US Constitution.",
+                sH: "संविधान की उद्देशिका (प्रस्तावना) और मौलिक अधिकार अमेरिका के संविधान से प्रेरित हैं।"
+            },
+            {
+                e: "Which constitutional amendment gave constitutional status to cooperative societies?",
+                h: "किस संवैधानिक संशोधन ने सहकारी समितियों को संवैधानिक दर्जा प्रदान किया?",
+                o: ["73rd Amendment / 73वां संशोधन", "86th Amendment / 86वां संशोधन", "91st Amendment / 91वां संशोधन", "97th Amendment / 97वां संशोधन"],
+                a: 3,
+                sE: "The 97th Constitutional Amendment Act of 2011 gave constitutional status and protection to cooperative societies (Part IXB).",
+                sH: "97वें संविधान संशोधन अधिनियम (2011) द्वारा सहकारी समितियों को संवैधानिक दर्जा दिया गया और भाग IXB जोड़ा गया।"
+            },
+            {
+                e: "Directive Principles of State Policy are borrowed from:",
+                h: "राज्य के नीति निदेशक तत्व कहाँ से लिए गए हैं?",
+                o: ["United Kingdom / यूनाइटेड किंगडम", "Canada / कनाडा", "United States of America / संयुक्त राज्य अमेरिका", "Ireland / आयरलैंड"],
+                a: 3,
+                sE: "Directive Principles of State Policy (DPSP) were borrowed from the Irish Constitution.",
+                sH: "राज्य के नीति निदेशक तत्व (DPSP) आयरलैंड के संविधान से लिए गए हैं।"
+            },
+            {
+                e: "Which of the following is part of the Concurrent List of the Indian Constitution?\nI. Forests\nII. Banking",
+                h: "निम्नलिखित में से कौन भारतीय संविधान की समवर्ती सूची का हिस्सा है?\nI. वन\nII. बैंकिंग",
+                o: ["Only I / केवल I", "Only II / केवल II", "Both I and II / I और II दोनों", "Neither I nor II / न तो I और न ही II"],
+                a: 0,
+                sE: "Forests is on the Concurrent List (transferred by 42nd Amendment). Banking is on the Union List.",
+                sH: "वन (Forests) समवर्ती सूची में है, जबकि बैंकिंग संघ सूची का विषय है।"
+            },
+            {
+                e: "Which of the following is part of the Concurrent List of the Indian Constitution?\nI. Public Health\nII. Trade Unions",
+                h: "निम्नलिखित में से कौन भारतीय संविधान की समवर्ती सूची का हिस्सा है?\nI. सार्वजनिक स्वास्थ्य\nII. मजदूर संघ",
+                o: ["Only I / केवल I", "Only II / केवल II", "Both I and II / I तथा II दोनों", "Neither I nor II / ना तो I तथा ना ही II"],
+                a: 1,
+                sE: "Trade Unions is in the Concurrent List. Public health and sanitation fall under the State List.",
+                sH: "मजदूर संघ (Trade Unions) समवर्ती सूची में है, जबकि सार्वजनिक स्वास्थ्य राज्य सूची का विषय है।"
+            },
+            {
+                e: "The last subject mentioned in the concurrent list of the Indian Constitution is numbered ____.",
+                h: "भारतीय संविधान की समवर्ती सूची में उल्लिखित अंतिम विषय ____ क्रमांकित है।",
+                o: ["34", "42", "47", "41"],
+                a: 2,
+                sE: "The Concurrent List originally contains 47 entries (numbered 1 to 47).",
+                sH: "समवर्ती सूची में मूल रूप से 47 प्रविष्टियाँ (entries) हैं।"
+            },
+            {
+                e: "Which of the following subjects is NOT included in the Union List under the Constitution, meaning it primarily falls under State legislative competence?",
+                h: "निम्नलिखित में से कौन सा विषय संविधान के तहत संघ सूची में शामिल नहीं है, जिसका अर्थ है कि यह मुख्य रूप से राज्य की विधायी क्षमता के अंतर्गत आता है?",
+                o: ["Atomic energy / परमाणु ऊर्जा", "Banking / बैंकिंग", "Public health / सार्वजनिक स्वास्थ्य", "Citizenship / नागरिकता"],
+                a: 2,
+                sE: "Public health is a State List subject. Atomic energy, banking, and citizenship are in the Union List.",
+                sH: "सार्वजनिक स्वास्थ्य राज्य सूची का विषय है, जबकि अन्य तीनों संघ सूची में आते हैं।"
+            },
+            {
+                e: "Which Schedule of the Indian Constitution contains the provisions of the Anti-defection Law?",
+                h: "भारतीय संविधान की कौनसी अनुसूची में दल-बदल विरोधी कानून के प्रावधान शामिल हैं?",
+                o: ["Sixth / छठी", "Eighth / आठवीं", "Tenth / दसवीं", "Ninth / नौवीं"],
+                a: 2,
+                sE: "The Tenth Schedule, added by the 52nd Amendment in 1985, contains the Anti-Defection provisions.",
+                sH: "दसवीं अनुसूची (1985 का 52वां संशोधन) में दल-बदल विरोधी कानून के प्रावधान दिए गए हैं।"
+            },
+            {
+                e: "Office of CAG was brought to our constitution from which of the following country?",
+                h: "CAG का कार्यालय हमारे संविधान में निम्नलिखित में से किस देश से लाया गया था?",
+                o: ["Britain / ब्रिटेन", "Australia / ऑस्ट्रेलिया", "Canada / कनाडा", "USA / अमेरिका"],
+                a: 0,
+                sE: "The office of the Comptroller and Auditor General (CAG) was adapted from the British administrative framework.",
+                sH: "नियंत्रक एवं महालेखापरीक्षक (CAG) का पद ब्रिटेन की व्यवस्था और 1935 के अधिनियम से अपनाया गया।"
+            },
+            {
+                e: "Which of the following is not a feature of the Indian Constitution borrowed from the British system?",
+                h: "निम्नलिखित में से कौन सी भारतीय संविधान की एक विशेषता ब्रिटिश प्रणाली से उधार ली गई नहीं है?",
+                o: ["Parliamentary government / संसदीय सरकार", "Rule of Law / कानून का शासन", "Cabinet responsibility / कैबिनेट की जिम्मेदारी", "Fundamental Duties / मौलिक कर्तव्य"],
+                a: 3,
+                sE: "Fundamental Duties were borrowed from the USSR, not the British system.",
+                sH: "मौलिक कर्तव्य सोवियत संघ (USSR) से लिए गए थे, ब्रिटेन से नहीं।"
+            },
+            {
+                e: "The term 'cooperative federalism' means:",
+                h: "'सहकारी संघवाद' शब्द का अर्थ है:",
+                o: [
+                    "Federalism based on judiciary / न्यायपालिका पर आधारित संघवाद",
+                    "Supremacy of the Union over States / राज्यों पर संघ की सर्वोच्चता",
+                    "Competition between Union and States / संघ और राज्यों के बीच प्रतिस्पर्धा",
+                    "Cooperation and coordination between Union and States / संघ और राज्यों के बीच सहयोग और समन्वय"
+                ],
+                a: 3,
+                sE: "Cooperative federalism implies mutual collaboration and coordination between the Union and the States.",
+                sH: "सहकारी संघवाद का अर्थ केंद्र और राज्यों के बीच सक्रिय सहयोग, परामर्श और समन्वय है।"
+            },
+            {
+                e: "Fill in the blank: The Constitution of India originally comprises of _______ number of articles, which later on increased through amendments.",
+                h: "रिक्त स्थान भरें: भारत का संविधान मूल रूप से _______ अनुच्छेदों से बना था, जिसे बाद में संशोधनों के माध्यम से बढ़ाया गया।",
+                o: ["395", "387", "410", "385"],
+                a: 0,
+                sE: "The original Constitution of India contained 395 Articles.",
+                sH: "भारत के मूल संविधान में 395 अनुच्छेद थे।"
+            },
+            {
+                e: "In which of the following cases does the Union have exclusive power?",
+                h: "निम्नलिखित में से किस मामले में संघ को विशेष शक्ति प्राप्त है?",
+                o: ["Agriculture / कृषि", "Public health / सार्वजनिक स्वास्थ्य", "Police / पुलिस", "Banking / बैंकिंग"],
+                a: 3,
+                sE: "Banking is an item on the Union List where only Parliament has legislative authority.",
+                sH: "बैंकिंग संघ सूची का विषय है जिस पर केवल केंद्र सरकार (संसद) को कानून बनाने का विशेष अधिकार है।"
+            },
+            {
+                e: "Which of the following is not a feature of Indian federalism?",
+                h: "निम्नलिखित में से कौनसी भारतीय संघवाद की विशेषता नहीं है?",
+                o: ["Dual citizenship / दोहरी नागरिकता", "Division of powers / शक्तियों का विभाजन", "Independent judiciary / स्वतंत्र न्यायपालिका", "Written Constitution / लिखित संविधान"],
+                a: 0,
+                sE: "India provides single citizenship, not dual citizenship.",
+                sH: "भारत में एकल नागरिकता है, दोहरी नागरिकता नहीं।"
+            },
+            {
+                e: "Match List-I (Schedules) with List-II (Provisions):\nA. Second Schedule\nB. Third Schedule\nC. Fourth Schedule\nD. Seventh Schedule\n1. Oaths | 2. Emoluments | 3. Rajya Sabha seats | 4. Division of powers",
+                h: "अनुसूचियों का मिलान करें:\nA. दूसरी अनुसूची\nB. तीसरी अनुसूची\nC. चौथी अनुसूची\nD. सातवीं अनुसूची\n1. शपथ | 2. परिलब्धियां/वेतन | 3. राज्यसभा सीटें | 4. शक्तियों का विभाजन",
+                o: ["A-2, B-1, C-3, D-4", "A-1, B-2, C-4, D-3", "A-4, B-1, C-3, D-2", "A-2, B-3, C-1, D-4"],
+                a: 0,
+                sE: "Second: Emoluments (2); Third: Oaths (1); Fourth: Rajya Sabha allocation (3); Seventh: Division of powers (4).",
+                sH: "दूसरी: वेतन/भत्ते (2); तीसरी: शपथ (1); चौथी: राज्यसभा सीटें (3); सातवीं: शक्तियों का विभाजन (4)।"
+            },
+            {
+                e: "What is the supreme law of India?",
+                h: "भारत का सर्वोच्च कानून कौन सा है?",
+                o: ["Supreme Court Judgment / सर्वोच्च न्यायालय का निर्णय", "Parliament / संसद", "Indian Constitution / भारतीय संविधान", "President's Order / राष्ट्रपति का आदेश"],
+                a: 2,
+                sE: "The Constitution of India is the supreme law of the land.",
+                sH: "भारतीय संविधान देश का सर्वोच्च कानून (Supreme Law) है।"
+            }
+        ];
+
+        const state = {
+            current: 0,
+            answers: new Array(QUESTIONS.length).fill(null),
+            locked: new Array(QUESTIONS.length).fill(false),
+            visited: new Array(QUESTIONS.length).fill(false),
+            lang: 'en',
+            mode: 'test',
+            startTime: null,
+            timerInterval: null,
+            elapsed: 0
+        };
+
+        function $(id) { return document.getElementById(id); }
+        function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+        function toast(msg) {
+            const t = $('toast');
+            $('toastText').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2000);
+        }
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            return String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+        }
+
+        function startApp(mode) {
+            state.mode = mode;
+            $('startScreen').classList.add('hidden');
+            $('quizApp').classList.remove('hidden');
+            state.startTime = Date.now();
+            state.visited[0] = true;
+            state.timerInterval = setInterval(() => {
+                state.elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+                $('timerText').textContent = formatTime(state.elapsed);
+            }, 1000);
+            renderQuestion();
+            buildPalette();
+        }
+
+        function renderQuestion() {
+            const i = state.current;
+            const q = QUESTIONS[i];
+            const qText = state.lang === 'en' ? q.e : q.h;
+            const isQuiz = state.mode === 'quiz';
+            const locked = state.locked[i];
+            const userAns = state.answers[i];
+
+            let optsHtml = '';
+            q.o.forEach((opt, idx) => {
+                let cls = '';
+                let tag = '';
+                if (isQuiz && locked) {
+                    if (idx === q.a) { cls = 'correct'; tag = '<span class="opt-tag">Correct</span>'; }
+                    if (userAns === idx && idx !== q.a) { cls = 'wrong'; tag = '<span class="opt-tag">Your Ans</span>'; }
+                } else if (userAns === idx) {
+                    cls = 'selected';
+                }
+                optsHtml += `
+                    <div class="opt ${cls} ${locked ? 'locked' : ''}" onclick="selectOption(${idx})">
+                        <div class="opt-letter">${String.fromCharCode(65 + idx)}</div>
+                        <div class="opt-text">${esc(opt)}</div>
+                        ${tag}
+                    </div>
+                `;
+            });
+
+            let solHtml = '';
+            if (isQuiz && locked) {
+                solHtml = `
+                    <div class="sol-box">
+                        <div class="sol-head"><i class="fas fa-lightbulb"></i> Solution & Explanation</div>
+                        <div class="sol-content">${state.lang === 'en' ? q.sE : q.sH}</div>
+                    </div>
+                `;
+            }
+
+            $('quizMain').innerHTML = `
+                <div class="q-card">
+                    <div class="q-top">
+                        <div class="q-num-badge"><i class="fas fa-hashtag"></i> Question ${i + 1} of ${QUESTIONS.length}</div>
+                        <button class="lang-btn" onclick="toggleLang()"><i class="fas fa-language"></i> ${state.lang === 'en' ? 'हिन्दी' : 'English'}</button>
+                    </div>
+                    <div class="q-text">${qText.replace(/\n/g, '<br>')}</div>
+                    <div class="opts">${optsHtml}</div>
+                    ${solHtml}
+                </div>
+            `;
+
+            $('prevBtn').disabled = i === 0;
+            $('nextLabel').textContent = i === QUESTIONS.length - 1 ? 'Finish' : 'Next';
+            updatePaletteGrid();
+        }
+
+        function selectOption(idx) {
+            const i = state.current;
+            if (state.mode === 'quiz' && state.locked[i]) return;
+
+            state.answers[i] = idx;
+            if (state.mode === 'quiz') {
+                state.locked[i] = true;
+                if (idx === QUESTIONS[i].a) toast('Correct! 🎉');
+                else toast('Incorrect');
+            }
+            renderQuestion();
+        }
+
+        function toggleLang() {
+            state.lang = state.lang === 'en' ? 'hi' : 'en';
+            renderQuestion();
+        }
+
+        function prevQuestion() {
+            if (state.current > 0) {
+                state.current--;
+                state.visited[state.current] = true;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (state.current < QUESTIONS.length - 1) {
+                state.current++;
+                state.visited[state.current] = true;
+                renderQuestion();
+            } else {
+                openSubmitModal();
+            }
+        }
+
+        function buildPalette() {
+            const grid = $('paletteGrid');
+            grid.innerHTML = '';
+            QUESTIONS.forEach((_, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'pal-btn';
+                btn.id = 'pal-' + i;
+                btn.textContent = i + 1;
+                btn.onclick = () => {
+                    state.current = i;
+                    state.visited[i] = true;
+                    closePalette();
+                    renderQuestion();
+                };
+                grid.appendChild(btn);
+            });
+            updatePaletteGrid();
+        }
+
+        function updatePaletteGrid() {
+            QUESTIONS.forEach((_, i) => {
+                const btn = $('pal-' + i);
+                if (!btn) return;
+                btn.className = 'pal-btn';
+                if (i === state.current) btn.classList.add('current');
+                if (state.answers[i] !== null) btn.classList.add('answered');
+            });
+        }
+
+        function openPalette() {
+            $('paletteDrawer').classList.add('open');$('paletteOverlay').classList.add('open');
+        }
+        function closePalette() {
+            $('paletteDrawer').classList.remove('open');$('paletteOverlay').classList.remove('open');
+        }
+
+        function openSubmitModal() {
+            const ans = state.answers.filter(a => a !== null).length;
+            $('modalAttempted').textContent = ans;
+            $('modalUnattempted').textContent = QUESTIONS.length - ans;
+            $('submitModal').classList.add('open');
+        }
+        function closeSubmitModal() {
+            $('submitModal').classList.remove('open');
+        }
+
+        function confirmSubmit() {
+            closeSubmitModal();
+            if (state.timerInterval) clearInterval(state.timerInterval);
+
+            let correct = 0, wrong = 0;
+            state.answers.forEach((ans, i) => {
+                if (ans !== null) {
+                    if (ans === QUESTIONS[i].a) correct++;
+                    else wrong++;
+                }
+            });
+
+            const attempted = correct + wrong;
+            const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
+            $('resultsInner').innerHTML = `
+                <div class="res-hero">
+                    <h2>Test Completed!</h2>
+                    <p style="color:var(--text-muted);font-size:14px;margin-top:2px;">Total Time: ${formatTime(state.elapsed)}</p>
+                </div>
+                <div class="res-score-card">
+                    <div class="res-score-val">${correct} <span>/ ${QUESTIONS.length}</span></div>
+                    <div class="res-score-lbl">Total Score</div>
+                </div>
+                <div class="res-grid">
+                    <div class="res-item">
+                        <div class="res-item-val" style="color:var(--green)">${correct}</div>
+                        <div class="res-item-lbl">Correct</div>
+                    </div>
+                    <div class="res-item">
+                        <div class="res-item-val" style="color:var(--red)">${wrong}</div>
+                        <div class="res-item-lbl">Wrong</div>
+                    </div>
+                    <div class="res-item">
+                        <div class="res-item-val">${attempted}</div>
+                        <div class="res-item-lbl">Attempted</div>
+                    </div>
+                    <div class="res-item">
+                        <div class="res-item-val" style="color:var(--primary)">${accuracy}%</div>
+                        <div class="res-item-lbl">Accuracy</div>
+                    </div>
+                </div>
+                <div class="res-actions">
+                    <button class="res-btn primary" onclick="location.reload()"><i class="fas fa-redo"></i> Retake Test</button>
+                </div>
+            `;
+            $('resultsScreen').classList.add('open');
+        }
+    </script>
+</body>
+</html>
